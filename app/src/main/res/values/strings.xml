@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Eco Grocer</string>
+
+    <!-- Auth Strings -->
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_subtitle">Login to your EcoGrocer account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create Account</string>
+    <string name="create_account_subtitle">Join the EcoGrocer community</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_password_subtitle">Enter your email to receive a\npassword reset link</string>
+    <string name="send_reset_link">Send Reset Link</string>
+    <string name="back_to_login">Back to Login</string>
+
+    <!-- OTP -->
+    <string name="otp_verification">OTP Verification</string>
+    <string name="otp_subtitle">Enter the 6-digit code sent to\nyour phone number</string>
+    <string name="verify">Verify</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="resend_in">Resend in %ds</string>
+
+    <!-- Home -->
+    <string name="hello_user">Hello, %s!</string>
+    <string name="welcome_eco_verse">Welcome to\nEco-Verse</string>
+    <string name="eco_verse_subtitle">Shop Groceries and Learn\nSustainable Waste Practices</string>
+    <string name="eco_store">EcoStore</string>
+    <string name="eco_store_desc">Use your EcoCoins to redeem products for free!</string>
+    <string name="redeem_with_coins">%d Coins</string>
+    <string name="not_enough_coins">Not enough EcoCoins</string>
+    <string name="success_redeem">Product redeemed successfully!</string>
+    <string name="start_shopping">Start Shopping</string>
+    <string name="eco_grocer">EcoGrocer</string>
+    <string name="order_groceries_desc">Order Groceries\nand Earn Rewards</string>
+    <string name="browse">Browse</string>
+    <string name="peel_identifier">Peel Identifier</string>
+    <string name="peel_identifier_desc">Snap a photo of\nfruit and vegetable\npeels</string>
+    <string name="upload_peels">Upload Peels</string>
+    <string name="eco_coin_rewards">EcoCoin Rewards</string>
+    <string name="eco_coin_rewards_desc">Earn EcoCoins for\nsustainable actions and\nredeem rewards</string>
+    <string name="view_rewards">View Rewards</string>
+
+    <!-- Grocery -->
+    <string name="search_products">Search products</string>
+    <string name="fruits">Fruits</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="grains">Grains</string>
+    <string name="get_rewards_banner">Get Rewards For\nBuying Groceries</string>
+    <string name="ten_percent_off">10% OFF</string>
+    <string name="add">Add</string>
+
+    <!-- Peel Identifier -->
+    <string name="snap_photo_title">Snap a Photo of Fruit or Vegetable Peels</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="peel_identifier_info">Identify peels and get eco-friendly reuse ideas!</string>
+    <string name="finish">Finish</string>
+
+    <!-- Peel Analysis -->
+    <string name="peel_analysis">Peel Analysis</string>
+    <string name="orange_peel_detected">Orange Peel Detected!</string>
+    <string name="eco_friendly_uses">Eco-Friendly Uses</string>
+    <string name="natural_cleaning_solution">Natural Cleaning Solution</string>
+    <string name="natural_cleaning_desc">Mix with vinegar &amp; water to create a natural cleaner.</string>
+    <string name="citrus_peel_cleaner">Citrus Peel Cleaner</string>
+    <string name="citrus_peel_desc">Use as a homemade citrus peel &amp; baking soda cleaner.</string>
+
+    <!-- Rewards -->
+    <string name="my_ecocoins">My EcoCoins</string>
+    <string name="ecocoins_to_next_reward">%d EcoCoins to Next Reward!</string>
+    <string name="available_rewards">Available Rewards</string>
+    <string name="redeem">Redeem</string>
+    <string name="reward_groceries_off">₹100 Off Groceries</string>
+    <string name="reward_free_delivery">Free Delivery Coupon</string>
+    <string name="reward_sustainability_kit">Sustainability Kit</string>
+
+    <!-- Profile -->
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save">Save</string>
+    <string name="address">Address</string>
+    <string name="order_history">Order History</string>
+    <string name="eco_coins">EcoCoins</string>
+    <string name="logout">Logout</string>
+    <string name="logout_confirm">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Bottom Nav -->
+    <string name="nav_home">Home</string>
+    <string name="nav_grocery">Grocery</string>
+    <string name="nav_camera">Camera</string>
+    <string name="nav_rewards">Rewards</string>
+
+    <!-- Errors -->
+    <string name="error_empty_field">This field cannot be empty</string>
+    <string name="error_invalid_email">Please enter a valid email</string>
+    <string name="error_short_password">Password must be at least 6 characters</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_login_failed">Login failed. Please check your credentials.</string>
+    <string name="error_signup_failed">Sign up failed. Please try again.</string>
+    <string name="success_account_created">Account created successfully!</string>
+    <string name="success_password_reset">Password reset email sent!</string>
+    <string name="success_profile_updated">Profile updated successfully!</string>
+    <string name="google_maps_key" translatable="false">AIzaSyA0QhA0Y2TPIypQuLxYzat3SP6ph3KD2_s</string>
+</resources>

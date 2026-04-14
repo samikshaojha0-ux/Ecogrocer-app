@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "826845150709",
+    "project_id": "ecogrocer-129a2",
+    "storage_bucket": "ecogrocer-129a2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826845150709:android:9331581ecad503960334bc",
+        "android_client_info": {
+          "package_name": "com.example.ecogrocer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKwoXjACmVHxfadTx3Qqj_wgkUGDbX6IU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,16 @@
+[
+  { "name": "Eco Grocer – Dadar Central Hub", "region": "Central Mumbai", "areaKeyword": "Dadar", "lat": 19.0178, "lng": 72.8478 },
+  { "name": "Eco Grocer – Parel Hub", "region": "Central Mumbai", "areaKeyword": "Parel", "lat": 19.0092, "lng": 72.8376 },
+  { "name": "Eco Grocer – Byculla Hub", "region": "Central Mumbai", "areaKeyword": "Byculla", "lat": 18.9806, "lng": 72.8335 },
+  { "name": "Eco Grocer – Bandra Hub", "region": "Western Line", "areaKeyword": "Bandra", "lat": 19.0596, "lng": 72.8295 },
+  { "name": "Eco Grocer – Andheri West Hub", "region": "Western Line", "areaKeyword": "Andheri", "lat": 19.1136, "lng": 72.8697 },
+  { "name": "Eco Grocer – Borivali Hub", "region": "Western Line", "areaKeyword": "Borivali", "lat": 19.2288, "lng": 72.8541 },
+  { "name": "Eco Grocer – Malad Hub", "region": "Western Line", "areaKeyword": "Malad", "lat": 19.1874, "lng": 72.8484 },
+  { "name": "Eco Grocer – Thane Central Hub", "region": "Central Line Area", "areaKeyword": "Thane", "lat": 19.2183, "lng": 72.9781 },
+  { "name": "Eco Grocer – Kalyan Fresh Hub", "region": "Central Line Area", "areaKeyword": "Kalyan", "lat": 19.2346, "lng": 73.1298 },
+  { "name": "Eco Grocer – Dombivli Hub", "region": "Central Line Area", "areaKeyword": "Dombivli", "lat": 19.2184, "lng": 73.0867 },
+  { "name": "Eco Grocer – Ghatkopar Hub", "region": "Suburbs", "areaKeyword": "Ghatkopar", "lat": 19.0790, "lng": 72.9080 },
+  { "name": "Eco Grocer – Vashi Smart Hub", "region": "Navi Mumbai", "areaKeyword": "Vashi", "lat": 19.0745, "lng": 72.9978 },
+  { "name": "Eco Grocer – Nerul Hub", "region": "Navi Mumbai", "areaKeyword": "Nerul", "lat": 19.0333, "lng": 73.0297 },
+  { "name": "Eco Grocer – Panvel Hub", "region": "Navi Mumbai", "areaKeyword": "Panvel", "lat": 18.9894, "lng": 73.1175 }
+]
