@@ -54,7 +54,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
         
         progressBar.setVisibility(View.VISIBLE);
         String userId = firebaseHelper.getCurrentUser().getUid();
-        firebaseHelper.getDatabase().child("orders").child(userId)
+        firebaseHelper.getDatabase().child("orders")
+                .orderByChild("userId")
+                .equalTo(userId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
