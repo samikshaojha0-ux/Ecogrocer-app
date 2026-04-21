@@ -13,10 +13,12 @@ import java.util.Locale;
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
     private List<User> userList;
+    private String currentUserId;
     private boolean sortByCoins;
 
-    public LeaderboardAdapter(List<User> userList, boolean sortByCoins) {
+    public LeaderboardAdapter(List<User> userList, String currentUserId, boolean sortByCoins) {
         this.userList = userList;
+        this.currentUserId = currentUserId;
         this.sortByCoins = sortByCoins;
     }
 
@@ -36,7 +38,15 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = userList.get(position);
         holder.tvRank.setText(String.valueOf(position + 1));
-        holder.tvName.setText(user.getName() != null ? user.getName() : "Eco Hero");
+        
+        String name = user.getName() != null ? user.getName() : "Eco Hero";
+        if (user.getUserId() != null && user.getUserId().equals(currentUserId)) {
+            name += " (You)";
+            holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.green_surface));
+        } else {
+            holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.background_card));
+        }
+        holder.tvName.setText(name);
 
         if (sortByCoins) {
             holder.tvScore.setText(String.valueOf(user.getEcoCoins()));

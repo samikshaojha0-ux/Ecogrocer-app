@@ -44,8 +44,13 @@ public class LeaderboardActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
+        String currentUid = "";
+        if (firebaseHelper.getCurrentUser() != null) {
+            currentUid = firebaseHelper.getCurrentUser().getUid();
+        }
+
         allUsers = new ArrayList<>();
-        adapter = new LeaderboardAdapter(allUsers, true);
+        adapter = new LeaderboardAdapter(allUsers, currentUid, true);
         rvLeaderboard.setLayoutManager(new LinearLayoutManager(this));
         rvLeaderboard.setAdapter(adapter);
 
