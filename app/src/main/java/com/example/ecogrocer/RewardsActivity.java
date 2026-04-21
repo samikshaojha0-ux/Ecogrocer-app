@@ -48,6 +48,11 @@ public class RewardsActivity extends AppCompatActivity {
         findViewById(R.id.btn_view_wallet).setOnClickListener(v -> {
             startActivity(new Intent(this, WalletActivity.class));
         });
+
+        // View Leaderboard button
+        findViewById(R.id.btn_view_leaderboard).setOnClickListener(v -> {
+            startActivity(new Intent(this, LeaderboardActivity.class));
+        });
     }
 
     private void loadEcoCoins() {
@@ -87,15 +92,6 @@ public class RewardsActivity extends AppCompatActivity {
         findViewById(R.id.btn_redeem_1).setOnClickListener(v -> {
             if (currentCoins >= 150) {
                 redeemReward(150, "₹100 Off Groceries");
-            } else {
-                Toast.makeText(this, "Not enough EcoCoins!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Free Delivery - 200 coins
-        findViewById(R.id.btn_redeem_2).setOnClickListener(v -> {
-            if (currentCoins >= 200) {
-                redeemReward(200, "Free Delivery Coupon");
             } else {
                 Toast.makeText(this, "Not enough EcoCoins!", Toast.LENGTH_SHORT).show();
             }

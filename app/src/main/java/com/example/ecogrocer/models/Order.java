@@ -9,6 +9,7 @@ public class Order {
     private double subtotal;
     private double deliveryFee;
     private double totalAmount;
+    private double discount;
     private String status; // "Order placed", "Packed", "Out for delivery", "Delivered"
     private String address;
     private String hubName;
@@ -29,6 +30,7 @@ public class Order {
         this.subtotal = subtotal;
         this.deliveryFee = deliveryFee;
         this.totalAmount = totalAmount;
+        this.discount = 0.0;
         this.status = status;
         this.address = address;
         this.hubName = hubName;
@@ -86,4 +88,7 @@ public class Order {
 
     public String getAssignedBoyPhone() { return assignedBoyPhone; }
     public void setAssignedBoyPhone(String assignedBoyPhone) { this.assignedBoyPhone = assignedBoyPhone; }
+
+    public double getDiscount() { return discount; }
+    public void setDiscount(double discount) { this.discount = discount; }
 }

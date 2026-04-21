@@ -93,6 +93,10 @@
             android:name=".FestivalBundlesActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".LeaderboardActivity"
+            android:exported="false" />
+
         <!-- Keep the old MainActivity for reference, but it's no longer the launcher -->
         <activity
             android:name=".MainActivity"

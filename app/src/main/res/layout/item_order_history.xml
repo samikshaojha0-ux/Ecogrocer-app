@@ -1,79 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/green_surface"
+    app:cardBackgroundColor="@color/background_card">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="?attr/selectableItemBackground">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_order_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#ORDER12345"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-bold" />
-            <TextView
-                android:id="@+id/tv_order_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="20 Oct 2023"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_order_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/tv_order_id"
+            android:layout_alignBottom="@id/tv_order_id"
+            android:src="@drawable/ic_order_history"
+            app:tint="@color/green_primary" 
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_order_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/iv_order_icon"
+            android:text="#ORDER12345"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:id="@+id/tv_order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/tv_order_id"
+            android:text="20 Oct 2023"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
 
         <View
+            android:id="@+id/divider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginVertical="12dp"
-            android:background="@color/divider" />
+            android:layout_below="@id/tv_order_id"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/green_surface" />
 
         <TextView
             android:id="@+id/tv_order_items"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apple, Banana, Milk"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:maxLines="2"
-            android:ellipsize="end" />
-
-        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-            <TextView
-                android:id="@+id/tv_order_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="₹450"
-                android:textColor="@color/green_primary"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif-bold" />
-            <TextView
-                android:id="@+id/tv_order_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="Out for delivery"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:background="@drawable/bg_chip_selected" />
-        </RelativeLayout>
+            android:layout_below="@id/divider1"
+            android:text="Apple, Banana, Milk"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="2"
+            android:ellipsize="end" />
+            
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tv_order_items"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#1A000000"
+            android:layerType="hardware"
+            android:alpha="0.3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="#F1F8E9"/>
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tv_order_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider2"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="₹450"
+            android:textColor="@color/green_primary_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/tv_order_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider2"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="Out for delivery"
+            android:textColor="@color/green_primary_dark"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:background="@drawable/bg_order_item"
+            android:backgroundTint="@color/green_surface" />
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

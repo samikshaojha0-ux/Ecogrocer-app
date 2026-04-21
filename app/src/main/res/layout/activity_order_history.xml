@@ -5,67 +5,116 @@
     android:layout_height="match_parent"
     android:background="@color/background_primary">
 
-    <RelativeLayout
-        android:id="@+id/header"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/white"
-        android:paddingHorizontal="16dp">
+        android:layout_height="wrap_content"
+        app:elevation="4dp"
+        android:background="@color/background_white">
 
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:padding="8dp"
-            android:src="@drawable/ic_back"
-            app:tint="@color/text_primary"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:paddingHorizontal="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="My Orders"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-bold" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/text_primary"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="My Orders"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ProgressBar
         android:id="@+id/progress_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:indeterminateTint="@color/green_primary"/>
 
+    <!-- Premium Empty State -->
     <LinearLayout
         android:id="@+id/layout_empty_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
+        android:padding="32dp"
         android:orientation="vertical"
         android:visibility="gone">
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_grocery"
-            app:tint="@color/divider" />
+
+        <RelativeLayout
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_order_item"
+            android:backgroundTint="@color/green_surface"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_grocery"
+                app:tint="@color/green_primary" />
+        </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="No orders placed yet!"
-            android:textColor="@color/text_secondary" />
+            android:text="No Orders Yet"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Looks like you haven't made your first sustainable purchase. Start shopping today!"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:lineSpacingExtra="4dp" />
+            
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_shop_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Shop Now"
+            app:cornerRadius="24dp"
+            app:backgroundTint="@color/green_primary"
+            android:textColor="@color/white"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="12dp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_order_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header"
+        android:layout_below="@id/appBarLayout"
         android:padding="12dp"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

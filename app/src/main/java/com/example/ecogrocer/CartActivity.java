@@ -43,7 +43,14 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
     private View layoutCartContent;
     private LinearLayout layoutEmptyCart, layoutCheckoutBar;
     private android.widget.RadioGroup rgPaymentMethod;
-    private final int DELIVERY_FEE = 25;
+    private com.google.android.material.textfield.TextInputEditText etPromoCode;
+    private android.widget.TextView tvPromoMessage, tvDiscount, tvDeliveryFee;
+    private View layoutDiscount;
+    private double appliedDiscount = 0;
+    private double currentDeliveryFee = 25;
+    private final int BASE_DELIVERY_FEE = 25;
+    private int currentUserCoins = 0;
+    private boolean pointsUsed = false;
     private Order pendingOrder;
 
     private RecyclerView rvRecommendations;
@@ -79,6 +86,20 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
         rvRecommendations = findViewById(R.id.rv_recommendations);
         layoutRecommendations = findViewById(R.id.layout_recommendations);
         
+        etPromoCode = findViewById(R.id.et_promo_code);
+        tvPromoMessage = findViewById(R.id.tv_promo_message);
+        tvDiscount = findViewById(R.id.tv_discount);
+        tvDeliveryFee = findViewById(R.id.tv_delivery_fee);
+        layoutDiscount = findViewById(R.id.layout_discount);
+        
+        tvUserCoins = findViewById(R.id.tv_user_ecocoins);
+        btnUsePoints = findViewById(R.id.btn_use_points);
+        
+        findViewById(R.id.btn_apply_promo).setOnClickListener(v -> validatePromoCode());
+        btnUsePoints.setOnClickListener(v -> handlePointRedemption());
+        
+        loadUserPoints();
+        
         Button btnCheckout = findViewById(R.id.btn_checkout);
         rgPaymentMethod.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.rb_online) {
@@ -94,6 +115,100 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
         findViewById(R.id.btn_checkout).setOnClickListener(v -> {
             prepareOrder();
         });
+    }
+
+    private void validatePromoCode() {
+        String code = etPromoCode.getText().toString().trim().toUpperCase();
+        if (code.isEmpty()) {
+            showPromoError("Please enter a code");
+            return;
+        }
+
+        double subtotal = cartManager.getSubtotal();
+        appliedDiscount = 0;
+        currentDeliveryFee = BASE_DELIVERY_FEE;
+
+        if (code.equals("FREEDEL")) {
+            currentDeliveryFee = 0;
+            showPromoSuccess("Free Delivery applied!");
+        } else if (code.equals("ECOSAVE")) {
+            if (subtotal >= 300) {
+                appliedDiscount = 50;
+                showPromoSuccess("₹50 discount applied!");
+            } else {
+                showPromoError("Valid on orders above ₹300");
+                return;
+            }
+        } else if (code.equals("WELCOME10")) {
+            appliedDiscount = subtotal * 0.1;
+            showPromoSuccess("10% discount applied!");
+        } else {
+            showPromoError("Invalid promo code");
+            return;
+        }
+        
+        updateUI();
+    }
+
+    private void showPromoError(String msg) {
+        tvPromoMessage.setVisibility(View.VISIBLE);
+        tvPromoMessage.setText(msg);
+        tvPromoMessage.setTextColor(getResources().getColor(R.color.error));
+        appliedDiscount = 0;
+        currentDeliveryFee = BASE_DELIVERY_FEE;
+        updateUI();
+    }
+
+    private void showPromoSuccess(String msg) {
+        tvPromoMessage.setVisibility(View.VISIBLE);
+        tvPromoMessage.setText(msg);
+        tvPromoMessage.setTextColor(getResources().getColor(R.color.green_primary));
+    }
+
+    private android.widget.TextView tvUserCoins;
+    private com.google.android.material.button.MaterialButton btnUsePoints;
+
+    private void loadUserPoints() {
+        FirebaseHelper firebaseHelper = FirebaseHelper.getInstance();
+        if (!firebaseHelper.isLoggedIn()) return;
+
+        firebaseHelper.getUserDocument(firebaseHelper.getCurrentUser().getUid(), new FirebaseHelper.OnUserFetchListener() {
+            @Override
+            public void onSuccess(com.example.ecogrocer.models.User user) {
+                if (user != null) {
+                    currentUserCoins = user.getEcoCoins();
+                    tvUserCoins.setText("Balance: " + currentUserCoins + " EcoPoints");
+                    
+                    if (currentUserCoins < 200) {
+                        btnUsePoints.setEnabled(false);
+                        btnUsePoints.setAlpha(0.5f);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {}
+        });
+    }
+
+    private void handlePointRedemption() {
+        if (pointsUsed) {
+            pointsUsed = false;
+            currentDeliveryFee = BASE_DELIVERY_FEE;
+            btnUsePoints.setText("FREE DELIVERY");
+            btnUsePoints.setTextColor(getResources().getColor(R.color.green_primary));
+        } else {
+            if (currentUserCoins >= 200) {
+                pointsUsed = true;
+                currentDeliveryFee = 0;
+                btnUsePoints.setText("POINTS APPLIED");
+                btnUsePoints.setTextColor(getResources().getColor(R.color.text_secondary));
+                Toast.makeText(this, "200 EcoPoints applied for free delivery!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Insufficient EcoPoints", Toast.LENGTH_SHORT).show();
+            }
+        }
+        updateUI();
     }
 
     private void prepareOrder() {
@@ -114,7 +229,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
 
                 String orderId = firebaseHelper.getDatabase().child("orders").push().getKey();
                 double subtotal = cartManager.getSubtotal();
-                double total = subtotal + DELIVERY_FEE;
+                double total = subtotal + currentDeliveryFee - appliedDiscount;
                 
                 com.example.ecogrocer.utils.HubSelector hubSelector = new com.example.ecogrocer.utils.HubSelector(CartActivity.this);
                 String assignedHub = hubSelector.findClosestHub(userAddress);
@@ -141,9 +256,10 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
                             }
 
                             pendingOrder = new Order(
-                                    orderId, userId, cartManager.getCartItems(), subtotal, DELIVERY_FEE, total,
+                                    orderId, userId, cartManager.getCartItems(), subtotal, currentDeliveryFee, total,
                                     "Order placed", userAddress, assignedHub, System.currentTimeMillis(), paymentMethod
                             );
+                            pendingOrder.setDiscount(appliedDiscount);
                             pendingOrder.setAssignedBoyId(boyId);
                             pendingOrder.setAssignedBoyName(boyName);
                             pendingOrder.setAssignedBoyPhone(boyPhone);
@@ -159,9 +275,10 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
                         public void onCancelled(@androidx.annotation.NonNull com.google.firebase.database.DatabaseError error) {
                             // Fallback to basic order
                             pendingOrder = new Order(
-                                    orderId, userId, cartManager.getCartItems(), subtotal, DELIVERY_FEE, total,
+                                    orderId, userId, cartManager.getCartItems(), subtotal, currentDeliveryFee, total,
                                     "Order placed", userAddress, assignedHub, System.currentTimeMillis(), paymentMethod
                             );
+                            pendingOrder.setDiscount(appliedDiscount);
                             if (paymentMethod.equals("COD")) placeProcessedOrder();
                             else startPayment(total);
                         }
@@ -209,6 +326,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
                 FirebaseHelper.getInstance().incrementCarbonSaved(pendingOrder.getUserId(), carbonSaved, 
                     success -> {}, failure -> {});
 
+                if (pointsUsed) {
+                    int remainingCoins = currentUserCoins - 200;
+                    FirebaseHelper.getInstance().updateEcoCoins(pendingOrder.getUserId(), remainingCoins,
+                        success -> {}, failure -> {});
+                }
+
                 cartManager.clearCart();
                 android.content.Intent intent = new android.content.Intent(CartActivity.this, OrderConfirmationActivity.class);
                 intent.putExtra("ORDER_ID", pendingOrder.getOrderId());
@@ -243,9 +366,18 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
             layoutCheckoutBar.setVisibility(View.VISIBLE);
 
             double subtotal = cartManager.getSubtotal();
-            double grandTotal = subtotal + DELIVERY_FEE;
+            double grandTotal = subtotal + currentDeliveryFee - appliedDiscount;
 
             tvSubtotal.setText("₹" + (int)subtotal);
+            tvDeliveryFee.setText("₹" + (int)currentDeliveryFee);
+            
+            if (appliedDiscount > 0) {
+                layoutDiscount.setVisibility(View.VISIBLE);
+                tvDiscount.setText("-₹" + (int)appliedDiscount);
+            } else {
+                layoutDiscount.setVisibility(View.GONE);
+            }
+            
             tvGrandTotal.setText("₹" + (int)grandTotal);
             tvBottomTotal.setText("₹" + (int)grandTotal);
             

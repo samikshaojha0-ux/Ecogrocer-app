@@ -42,6 +42,15 @@ public class OrderHistoryActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_history);
         emptyState = findViewById(R.id.layout_empty_history);
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
+        
+        View btnShopNow = findViewById(R.id.btn_shop_now);
+        if (btnShopNow != null) {
+            btnShopNow.setVisibility(View.VISIBLE);
+            btnShopNow.setOnClickListener(v -> {
+                startActivity(new android.content.Intent(OrderHistoryActivity.this, GroceryActivity.class));
+                finish();
+            });
+        }
 
         historyList = new ArrayList<>();
         adapter = new OrderHistoryAdapter(historyList);
